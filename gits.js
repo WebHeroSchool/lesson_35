@@ -1,13 +1,9 @@
 
-let href = document.location.href;
-login = 'viktoriahamova';
+//let href = document.location.href;
+logi = 'viktoriahamova';
 const url = function () {
-  let user = href.split('=');
-  if (user[1]) {
-    username = user[1];
-  } else {
-    username = login
-  };
+    username = logi
+
   return 'https://api.github.com/users/' + username;
 }
 let link = url();
@@ -20,6 +16,8 @@ if (response.ok) {
   let name = document.createElement("h1");
   name.innerHTML = json.name;
   document.body.append(name);
+  name.addEventListener("click", () => window.location = json.html_url);
+
 
   let img = new Image();
   img.src = json.avatar_url;
@@ -28,6 +26,7 @@ if (response.ok) {
   let bio = document.createElement("p");
   bio.innerHTML = json.bio;
   document.body.append(bio);
+
 } else {
   let element = document.createElement("h1");
   element.innerHTML = "<h1>User is not found </h1>";
