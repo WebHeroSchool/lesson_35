@@ -17,7 +17,7 @@ if (response.ok) {
   name.innerHTML = json.name;
   document.body.append(name);
   name.addEventListener("click", () => window.location = json.html_url);
-
+  name.title = json.login;
 
   let img = new Image();
   img.src = json.avatar_url;
