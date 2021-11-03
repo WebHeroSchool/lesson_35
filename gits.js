@@ -1,9 +1,13 @@
 
-let login = 'viktoriahamova'; //Вводим любой никнейм и выводятся данные
 let href = document.location.href;
-
+login = 'viktoriahamova';
 const url = function () {
+  let user = href.split('=');
+  if (user[1]) {
+    username = user[1];
+  } else {
     username = login
+  };
   return 'https://api.github.com/users/' + username;
 }
 let link = url();
