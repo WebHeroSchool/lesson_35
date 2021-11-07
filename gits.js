@@ -1,35 +1,28 @@
-
-//let href = document.location.href;
-logi = 'viktoriahamova';
-const url = function () {
-    username = logi
-
-  return 'https://api.github.com/users/' + username;
+let url = window.location.href;
+let req = (url) =>  {
+	let user = url.split('=');
+	let name = user[1];
+	if (name == undefined) {
+			name = 'viktoriahamova'
+	}
+	return name;
 }
-let link = url();
 
-let rez = async function() {
- let response = await fetch(link);
-if (response.ok) {
-  json = await response.json();
+fetch(`https://api.github.com/users/${req(url)}`)
+    .then(res => res.json())
+    .then(json => {
+     let name = document.createElement("h1");
+      name.innerHTML = json.name;
+      document.body.append(name);
+      name.addEventListener("click", () => window.location = json.html_url);
+      name.title = json.login;
 
-  let name = document.createElement("h1");
-  name.innerHTML = json.name;
-  document.body.append(name);
-  name.addEventListener("click", () => window.location = json.html_url);
-  name.title = json.login;
+     let img = new Image();
+      img.src = json.avatar_url;
+      document.body.append(img);
 
-  let img = new Image();
-  img.src = json.avatar_url;
-  document.body.append(img);
-
-  let bio = document.createElement("p");
-  bio.innerHTML = json.bio;
-  document.body.append(bio);
-
-} else {
-  let element = document.createElement("h1");
-  element.innerHTML = "<h1>User is not found </h1>";
-  document.body.append(element);
-}
-}();
+      let bio = document.createElement("p");
+      bio.innerHTML = json.bio;
+      document.body.append(bio);
+      })
+    .catch(err => console.error(err));
