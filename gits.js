@@ -12,17 +12,33 @@ fetch(`https://api.github.com/users/${req(url)}`)
     .then(res => res.json())
     .then(json => {
      let name = document.createElement("h1");
-      name.innerHTML = json.name;
+		 if (json.name != null) {
+								name.innerHTML = json.name;
+						} else {
+								name.innerHTML = 'User information unavailable';
+						}
+      //name.innerHTML = json.name;
       document.body.append(name);
       name.addEventListener("click", () => window.location = json.html_url);
       name.title = json.login;
-
-     let img = new Image();
-      img.src = json.avatar_url;
-      document.body.append(img);
+			name.style.cursor = "pointer";
 
       let bio = document.createElement("p");
-      bio.innerHTML = json.bio;
+			if (json.bio != null) {
+                bio.innerHTML = json.bio;
+            } else {
+                bio.innerHTML = 'User information unavailable';
+            }
+      //bio.innerHTML = json.bio;
       document.body.append(bio);
+
+			let img = new Image();
+			if (json.avatar_url != null) {
+                img.src = json.avatar_url;
+            } else {
+                img.innerHTML = 'User information unavailable';
+            }
+			 //img.src = json.avatar_url;
+			 document.body.append(img);
       })
     .catch(err => console.error(err));
