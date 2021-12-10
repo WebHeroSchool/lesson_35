@@ -27,7 +27,7 @@ html, body
 	position: relative;
 }
 
-.📦
+.point
 {
 	width: var(--box-size);
 	height: var(--box-size);
@@ -35,7 +35,7 @@ html, body
 	display: block;
 	transform-origin: -50% center;
 	border-radius: var(--box-border-radius);
-	
+
 	&:after
 	{
 		content: '';
@@ -48,24 +48,24 @@ html, body
 		border-radius: var(--box-border-radius);
 		box-shadow: 0px 0px 10px 0px rgba(#1C9FFF, 0.4);
 	}
-	
+
 	&:nth-child(1)
 	{
 		animation: slide var(--duration) ease-in-out infinite alternate;
 		&:after{ animation: color-change var(--duration) ease-in-out infinite alternate; }
 	}
-	
-	@for $i from 1 to 5 
+
+	@for $i from 1 to 5
 	{
 		&:nth-child(#{$i + 1})
-		{	
+		{
 			animation: flip-#{$i} var(--duration) ease-in-out infinite alternate;
 			&:after{ animation: squidge-#{$i} var(--duration) ease-in-out infinite alternate; }
 		}
 	}
-	
+
 	&:nth-child(2):after{ background-color: #1C9FFF; }
-	&:nth-child(3):after{ background-color: #1FB1FD; }	
+	&:nth-child(3):after{ background-color: #1FB1FD; }
 	&:nth-child(4):after{ background-color: #22C7FB; }
 	&:nth-child(5):after{ background-color: #23D3FB; }
 }
@@ -82,13 +82,13 @@ html, body
 	100% { background-color: #23D3FB; }
 }
 
-@for $i from 1 to 5 
-{	
+@for $i from 1 to 5
+{
     @keyframes flip-#{$i} {
-      0%, #{$i * 15}% { transform: rotate(0); }  
+      0%, #{$i * 15}% { transform: rotate(0); }
       #{$i * 15 + 20}%, 100% { transform: rotate(-180deg); }
     }
-	
+
 	@keyframes squidge-#{$i}
 	{
 		#{$i * 15 - 10}% { transform-origin: center bottom; transform: scalex(1) scaley(1);}
