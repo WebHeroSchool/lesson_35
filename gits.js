@@ -1,4 +1,17 @@
 let url = window.location.href;
+
+let point = document.body.firstElementChild;
+document.body.classList.add('loadingio-spinner-gear-agzv9ov9qih');
+let style = document.body.children[1];
+style.classList.add('ldio-z6e8mbo4ieg');
+let site = document.body.children[2];
+site.classList.add('end');
+setTimeout (()=> {
+  point.classList.add('end');
+style.classList.add('end');
+
+let date = new Date();
+
 let req = (url) =>  {
 	let user = url.split('=');
 	let name = user[1];
@@ -17,7 +30,6 @@ fetch(`https://api.github.com/users/${req(url)}`)
 						} else {
 								name.innerHTML = 'User information unavailable';
 						}
-      //name.innerHTML = json.name;
       document.body.append(name);
       name.addEventListener("click", () => window.location = json.html_url);
       name.title = json.login;
@@ -29,7 +41,6 @@ fetch(`https://api.github.com/users/${req(url)}`)
             } else {
                 bio.innerHTML = 'User information unavailable';
             }
-      //bio.innerHTML = json.bio;
       document.body.append(bio);
 
 			let img = new Image();
@@ -38,7 +49,15 @@ fetch(`https://api.github.com/users/${req(url)}`)
             } else {
                 img.innerHTML = 'User information unavailable';
             }
-			 //img.src = json.avatar_url;
 			 document.body.append(img);
       })
     .catch(err => console.error(err));
+
+		const getDate = new Promise((resolve, reject) => {
+			setTimeout(() => date ? resolve(date) : reject('Date not set'), 2000);
+		});
+		getDate
+		.then(date => {
+			 document.body.append(date);
+		})
+}, 2000);
