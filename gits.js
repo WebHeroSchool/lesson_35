@@ -1,4 +1,7 @@
 let url = window.location.href;
+
+let date = new Date();
+
 let req = (url) =>  {
 	let user = url.split('=');
 	let name = user[1];
@@ -7,6 +10,14 @@ let req = (url) =>  {
 	}
 	return name;
 }
+
+
+
+/*const getUrl = new Promise((resolve, reject) =>{
+	setTimeout(() => url ? resolve(url) ? reject('url not set'), 3000)
+});*/
+
+
 
 fetch(`https://api.github.com/users/${req(url)}`)
     .then(res => res.json())
@@ -42,3 +53,13 @@ fetch(`https://api.github.com/users/${req(url)}`)
 			 document.body.append(img);
       })
     .catch(err => console.error(err));
+
+
+		const getDate = new Promise((resolve, reject) => {
+			setTimeout(() => date ? resolve(date) : reject('Date not set'), 3000);
+		});
+		getDate
+		.then(date => {
+			 document.body.append(date);
+		})
+
